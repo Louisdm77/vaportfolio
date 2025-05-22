@@ -44,7 +44,7 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-12 bg-gray-100 h-auto  relative overflow-hidden"
+      className="py-12 bg-gray-100 h-auto relative overflow-hidden"
     >
       {/* Background gradient and blur */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-purple-500/10 to-gray-100" />
@@ -52,7 +52,7 @@ function Testimonials() {
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-300/20 rounded-full translate-x-1/4 -translate-y-1/3 blur-3xl" />
 
       <motion.div
-        className="max-w-4xl mx-auto px-8 relative z-10 flex flex-col items-center gap-4"
+        className="max-w-4xl mx-auto px-0 sm:px-8 relative z-10 flex flex-col items-center gap-4"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -65,14 +65,14 @@ function Testimonials() {
 
         {/* Carousel on mobile, grid on md+ */}
         {isMobile ? (
-          <div className="relative w-full max-w-xs mx-auto">
+          <div className="w-full max-w-xs mx-auto text-center">
             <motion.div
               key={current}
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-sm p-4 rounded-3xl shadow-md border border-teal-300/50 hover:bg-teal-50/90 text-center"
+              className="bg-white/80 backdrop-blur-sm p-4 rounded-3xl shadow-md border border-teal-300/50 hover:bg-teal-50/90"
             >
               <p className="text-base text-gray-900 italic mb-3">
                 "{testimonials[current].quote}"
@@ -83,7 +83,7 @@ function Testimonials() {
             </motion.div>
 
             {/* Indicators */}
-            <div className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 flex gap-2">
+            <div className="mt-4 flex justify-center gap-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
@@ -98,7 +98,7 @@ function Testimonials() {
             </div>
 
             {/* Controls */}
-            <div className="absolute bottom-[-44px] left-1/2 transform -translate-x-1/2 flex gap-4 text-xl  font-bold">
+            <div className="mt-4 flex justify-center gap-4 text-xl font-bold">
               <button
                 onClick={prevSlide}
                 className="text-teal-600 hover:underline"
@@ -106,20 +106,16 @@ function Testimonials() {
                 ← Prev
               </button>
               <button
-                onClick={nextSlide}
-                className="text-teal-600 hover:underline"
-              >
-                Next →
-              </button>
-            </div>
-
-            {/* Autoplay Toggle */}
-            <div className="absolute bottom-[-44px] right-4">
-              <button
                 onClick={() => setIsPlaying((prev) => !prev)}
                 className="text-teal-600 hover:underline"
               >
                 {isPlaying ? 'Pause' : 'Play'}
+              </button>
+              <button
+                onClick={nextSlide}
+                className="text-teal-600 hover:underline"
+              >
+                Next →
               </button>
             </div>
           </div>

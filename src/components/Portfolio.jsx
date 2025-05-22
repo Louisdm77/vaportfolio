@@ -5,7 +5,7 @@ import data from "../assets/images/data.png";
 import email from "../assets/images/email.png";
 import slide from "../assets/images/slide.png";
 import web from "../assets/images/web.png";
-// import placeholder from "../assets/images/placeholder.png"; // Fallback image
+import va from "../assets/images/va.png";
 import { FaSearchPlus } from "react-icons/fa";
 
 function Portfolio() {
@@ -14,7 +14,7 @@ function Portfolio() {
       title: "Data Entry",
       description: "Efficiently organized and entered data into spreadsheets.",
       image: data,
-      link: "#data-entry",
+      link: "https://docs.google.com/spreadsheets/d/1lfmczQguk8Y79OuuW68BN8QO89MvF3MCmOSxl32rVzw/edit?usp=sharing",
     },
     {
       title: "Calendar Management",
@@ -39,12 +39,13 @@ function Portfolio() {
       description:
         "Developed and maintained websites with modern technologies.",
       image: web,
-      link: "#web-development",
+      link: "foodies-hub-chi.vercel.app",
     },
     {
-      title: "Research & Documentation",
-      description: "Conducted thorough research and documented findings.",
-      image: data,
+      title: "General VA Support",
+      description:
+        "Provided comprehensive virtual assistance for various tasks.",
+      image: va,
       link: "#research-documentation",
     },
   ];
@@ -56,7 +57,7 @@ function Portfolio() {
   // Debug click handler
   const handleImageClick = (image) => {
     console.log("Image clicked:", image);
-    setSelectedImage(image || placeholder);
+    setSelectedImage(image || va);
     setIsZoomed(false);
   };
 
@@ -127,7 +128,7 @@ function Portfolio() {
                 onClick={() => handleImageClick(project.image)}
               >
                 <motion.img
-                  src={project.image || placeholder}
+                  src={project.image || va}
                   alt={project.title}
                   className="w-full h-64 object-cover rounded-xl mb-4 cursor-pointer"
                   whileHover={{ scale: 1.05 }}
@@ -135,7 +136,7 @@ function Portfolio() {
                   transition={{ duration: 0.3 }}
                   onError={(e) => {
                     console.error(`Failed to load image: ${project.image}`);
-                    e.target.src = placeholder;
+                    e.target.src = va;
                   }}
                 />
                 {/* Hover overlay for desktop */}
@@ -223,7 +224,7 @@ function Portfolio() {
                         "Modal image failed to load:",
                         selectedImage
                       );
-                      e.target.src = placeholder;
+                      e.target.src = va;
                       setSelectedImage(null);
                     }}
                   />

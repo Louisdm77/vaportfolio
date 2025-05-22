@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { FaEnvelope, FaLinkedin, FaBriefcase } from "react-icons/fa"; // Icons for email and socials
 
 function Contact() {
   return (
     <section id="contact" className="py-10 bg-gray-200">
       <motion.div
-        className="max-w-5xl mx-auto px-8"
+        className="max-w-5xl mx-auto px-0 sm:px-8"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -13,9 +14,9 @@ function Contact() {
         <h2 className="text-4xl font-bold text-green-800 mb-8 text-center">
           Get in Touch
         </h2>
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col md:flex-row gap-12 ">
           <motion.div
-            className="md:w-1/2"
+            className="md:w-1/2 p-3"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -33,69 +34,48 @@ function Contact() {
               transcription, web development, or other administrative tasks.
             </p>
           </motion.div>
-          <motion.form
-            action="https://formspree.io/f/your-form-id"
-            method="POST"
-            className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg"
+          <motion.div
+            className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="mb-6">
-              <label
-                htmlFor="name"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="message"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <motion.button
-              type="submit"
-              className="w-full bg-emerald-600 text-white py-4 rounded-lg hover:bg-emerald-700 transition duration-300"
+            <h3 className="text-2xl font-semibold text-emerald-600 mb-4">
+              Ready to Streamline Your Workflow?
+            </h3>
+            <p className="text-gray-700 mb-6">
+              Reach out to discuss your project or explore how I can assist you!
+            </p>
+            <motion.a
+              href="mailto:danakwaji3@gmail.com?subject=Virtual%20Assistant%20Inquiry"
+              className="flex items-center gap-2 bg-emerald-600 text-white py-4 px-6 rounded-lg hover:bg-emerald-700 transition duration-300 mb-6"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Send Message
-            </motion.button>
-          </motion.form>
+              <FaEnvelope /> Email Me
+            </motion.a>
+            <div className="flex gap-4">
+              <motion.a
+                href="https://www.linkedin.com/akwajidan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 hover:text-emerald-800"
+                whileHover={{ scale: 1.2 }}
+              >
+                <FaLinkedin size={24} />
+              </motion.a>
+              <motion.a
+                href="https://www.upwork.com/freelancers/~013ac125358fc74cdf?mp_source=share"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 hover:text-emerald-800 underline font-bold"
+                whileHover={{ scale: 1.2 }}
+              >
+                Upwork
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
