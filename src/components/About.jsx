@@ -8,7 +8,7 @@ function About() {
       {/* Subtle background shape */}
       <div className="absolute top-0 left-0 w-32 h-32 bg-teal-300/20 rounded-full -translate-x-1/2 translate-y-1/4 blur-3xl" />
       <motion.div
-        className="max-w-4xl mx-auto px-8 relative z-10 flex flex-col items-center gap-4"
+        className="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center gap-4"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
