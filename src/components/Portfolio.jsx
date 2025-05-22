@@ -5,6 +5,7 @@ import data from "../assets/images/data.png";
 import email from "../assets/images/email.png";
 import slide from "../assets/images/slide.png";
 import web from "../assets/images/web.png";
+// import placeholder from "../assets/images/placeholder.png"; // Fallback image
 import { FaSearchPlus } from "react-icons/fa";
 
 function Portfolio() {
@@ -42,7 +43,7 @@ function Portfolio() {
     {
       title: "Research & Documentation",
       description: "Conducted thorough research and documented findings.",
-      image: web,
+      image: data,
       link: "#research-documentation",
     },
   ];
@@ -52,10 +53,10 @@ function Portfolio() {
   // Debug click handler
   const handleImageClick = (image) => {
     console.log("Image clicked:", image);
-    setSelectedImage(image || placeholder); // Fallback to placeholder
+    setSelectedImage(image || placeholder);
   };
 
-  // Log modal state and errors
+  // Log modal state
   useEffect(() => {
     console.log("Selected image state:", selectedImage);
   }, [selectedImage]);
@@ -109,7 +110,7 @@ function Portfolio() {
                   transition={{ duration: 0.3 }}
                   onError={(e) => {
                     console.error(`Failed to load image: ${project.image}`);
-                    e.target.src = placeholder; // Fallback to placeholder
+                    e.target.src = placeholder;
                   }}
                 />
                 {/* Hover overlay for desktop */}
@@ -142,14 +143,14 @@ function Portfolio() {
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-[100]"
+            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-[1000]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
-              className="relative bg-white rounded-2xl p-4 max-w-[90vw] md:max-w-[70vw] max-h-[90vh] overflow-auto"
+              className="relative flex justify-center items-center w-full h-full max-w-[100vw] max-h-[100vh] p-0 md:p-4 md:bg-white md:rounded-2xl md:max-w-[70vw] md:max-h-[80vh]"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -160,18 +161,19 @@ function Portfolio() {
                 <motion.img
                   src={selectedImage}
                   alt="Selected Work"
-                  className="w-full max-w-[800px] max-h-[80vh] object-contain rounded-lg"
+                  className="w-full h-full  object-contain md:rounded-lg touch-pinch-zoom"
+                  style={{ width: "100vw !important", height: "auto !important" }}
                   onError={(e) => {
                     console.error("Modal image failed to load:", selectedImage);
-                    e.target.src = placeholder; // Fallback to placeholder
-                    setSelectedImage(null); // Close modal
+                    e.target.src = placeholder;
+                    setSelectedImage(null);
                   }}
                 />
               ) : (
-                <div className="text-red-500 text-center">Image failed to load</div>
+                <div className="text-red-500 text-center p-4">Image failed to load</div>
               )}
               <button
-                className="absolute top-2 right-2 bg-teal-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl shadow-lg hover:bg-teal-600 transition duration-300"
+                className="absolute top-4 right-4 bg-teal-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl shadow-lg hover:bg-teal-600 transition duration-300"
                 onClick={() => setSelectedImage(null)}
                 aria-label="Close preview"
               >
