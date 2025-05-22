@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react"; // Added useRef
+import { useState, useEffect, useRef } from "react";
 import calendar from "../assets/images/calendar.png";
 import data from "../assets/images/data.png";
 import email from "../assets/images/email.png";
@@ -36,8 +36,7 @@ function Portfolio() {
     },
     {
       title: "Web Development",
-      description:
-        "Developed and maintained websites with modern technologies.",
+      description: "Developed and maintained websites with modern technologies.",
       image: web,
       link: "#web-development",
     },
@@ -50,14 +49,14 @@ function Portfolio() {
   ];
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isZoomed, setIsZoomed] = useState(false); // Added for zoom detection
-  const imageRef = useRef(null); // Added to reference image
+  const [isZoomed, setIsZoomed] = useState(false);
+  const imageRef = useRef(null);
 
   // Debug click handler
   const handleImageClick = (image) => {
     console.log("Image clicked:", image);
     setSelectedImage(image || placeholder);
-    setIsZoomed(false); // Reset zoom state
+    setIsZoomed(false);
   };
 
   // Detect zoom via wheel or pinch
@@ -67,7 +66,7 @@ function Portfolio() {
 
     const handleZoom = (e) => {
       const scale = img.getBoundingClientRect().width / img.offsetWidth;
-      setIsZoomed(scale > 1.1); // Consider zoomed if scale > 1.1
+      setIsZoomed(scale > 1.1);
     };
 
     img.addEventListener("touchmove", handleZoom);
@@ -80,7 +79,7 @@ function Portfolio() {
 
   // Log modal state
   useEffect(() => {
-    console.log("Selected image state:", selectedImage, "Is zoomed:", isZoomed); // Added isZoomed to log
+    console.log("Selected image state:", selectedImage, "Is zoomed:", isZoomed);
   }, [selectedImage, isZoomed]);
 
   return (
@@ -122,10 +121,7 @@ function Portfolio() {
               }}
               viewport={{ once: true }}
             >
-              <div
-                className="relative group"
-                onClick={() => handleImageClick(project.image)}
-              >
+              <div className="relative group" onClick={() => handleImageClick(project.image)}>
                 <motion.img
                   src={project.image || placeholder}
                   alt={project.title}
@@ -140,24 +136,15 @@ function Portfolio() {
                 />
                 {/* Hover overlay for desktop */}
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex pointer-events-none">
-                  <span className="text-white font-medium text-lg">
-                    Click to View
-                  </span>
+                  <span className="text-white font-medium text-lg">Click to View</span>
                 </div>
                 {/* Persistent icon for mobile */}
                 <div className="absolute bottom-2 right-2 bg-teal-500 bg-opacity-70 rounded-full p-2 md:hidden pointer-events-none">
-                  <FaSearchPlus
-                    className="text-white text-lg"
-                    aria-label="Tap to view image"
-                  />
+                  <FaSearchPlus className="text-white text-lg" aria-label="Tap to view image" />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-teal-500 mb-2 font-serif">
-                {project.title}
-              </h3>
-              <p className="text-sm text-gray-900 mb-3">
-                {project.description}
-              </p>
+              <h3 className="text-lg font-semibold text-teal-500 mb-2 font-serif">{project.title}</h3>
+              <p className="text-sm text-gray-900 mb-3">{project.description}</p>
               <motion.a
                 href={project.link}
                 className="inline-block bg-teal-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:bg-teal-600 transition duration-300"
@@ -189,48 +176,24 @@ function Portfolio() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
             >
               <div className="w-full h-full overflow-auto touch-pan-zoom">
                 {selectedImage ? (
                   <motion.img
                     ref={imageRef}
                     src={selectedImage}
-                    alt={`Screenshot of ${
-                      selectedImage.includes("data")
-                        ? "Data Entry"
-                        : selectedImage.includes("calendar")
-                        ? "Calendar Management"
-                        : selectedImage.includes("email")
-                        ? "Email Handling"
-                        : selectedImage.includes("slide")
-                        ? "Reports & Slides"
-                        : selectedImage.includes("web")
-                        ? "Web Development"
-                        : "Work Sample"
-                    }`}
-                    className={`w-full ${
-                      isZoomed
-                        ? "w-[200%] h-auto"
-                        : "max-w-[100vw] max-h-[100vh]"
-                    } md:max-w-[800px] md:max-h-[80vh] object-contain md:rounded-lg`}
-                    style={{
-                      width: isZoomed ? "200% !important" : "100vw !important",
-                      height: "auto !important",
-                    }}
+                    alt={`Screenshot of ${selectedImage.includes("data") ? "Data Entry" : selectedImage.includes("calendar") ? "Calendar Management" : selectedImage.includes("email") ? "Email Handling" : selectedImage.includes("slide") ? "Reports & Slides" : selectedImage.includes("web") ? "Web Development" : "Work Sample"}`}
+                    className={`w-full ${isZoomed ? "w-[200%] h-auto" : "max-w-[100vw] max-h-[100vh]"} md:max-w-[800px] md:max-h-[80vh] object-contain md:rounded-lg`}
+                    style={{ width: isZoomed ? "200% !important" : "100vw !important", height: "auto !important" }}
+                    onClick={(e) => e.stopPropagation()}
                     onError={(e) => {
-                      console.error(
-                        "Modal image failed to load:",
-                        selectedImage
-                      );
+                      console.error("Modal image failed to load:", selectedImage);
                       e.target.src = placeholder;
                       setSelectedImage(null);
                     }}
                   />
                 ) : (
-                  <div className="text-red-500 text-center p-4">
-                    Image failed to load
-                  </div>
+                  <div className="text-red-500 text-center p-4">Image failed to load</div>
                 )}
               </div>
               <button

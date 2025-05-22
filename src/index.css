@@ -3,3 +3,11 @@
 body {
   font-family: "Ancizar Serif", serif;
 }
+.touch-pan-zoom {
+  touch-action: pan-x pan-y pinch-zoom;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
