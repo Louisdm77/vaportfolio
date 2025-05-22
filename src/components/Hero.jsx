@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import me from "../assets/images/me.jpg";
+import me from "../assets/images/myimg.jpeg";
 
 // Animation variants
 const letterVariants = {
