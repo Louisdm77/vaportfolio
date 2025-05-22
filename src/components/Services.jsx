@@ -4,36 +4,41 @@ function Services() {
   const services = [
     {
       title: "Calendar Management",
-      description: "Seamlessly organize schedules and appointments using tools like Google Calendar for optimal time management.",
+      description:
+        "Seamlessly organize schedules and appointments using tools like Google Calendar for optimal time management.",
     },
     {
       title: "Email Management",
-      description: "Streamline your inbox with professional, timely responses and efficient email organization.",
+      description:
+        "Streamline your inbox with professional, timely responses and efficient email organization.",
     },
     {
       title: "Proofreading & Editing",
-      description: "Deliver polished, error-free documents with meticulous attention to detail and clarity.",
-    },
-    {
-      title: "Professional Communication",
-      description: "Craft clear, concise, and professional correspondence to enhance client relationships.",
+      description:
+        "Deliver polished, error-free documents with meticulous attention to detail and clarity.",
     },
     {
       title: "Google Workspace Tools",
-      description: "Master Docs, Sheets, and Slides to create efficient, organized workflows for your business.",
+      description:
+        "Master Docs, Sheets, and Slides to create efficient, organized workflows for your business.",
     },
     {
       title: "Web Development",
-      description: "Build responsive, modern websites using HTML, CSS, JavaScript, React, and Tailwind CSS.",
+      description:
+        "Build responsive, modern websites using HTML, CSS, JavaScript, React, and Tailwind CSS.",
     },
     {
       title: "General VA Support",
-      description: "Provide flexible, tailored administrative support to meet your unique business needs.",
+      description:
+        "Provide flexible, tailored administrative support to meet your unique business needs.",
     },
   ];
 
   return (
-    <section id="services" className="py-8 bg-gray-100 min-h-[60vh] relative overflow-hidden">
+    <section
+      id="services"
+      className="py-8 bg-gray-100 min-h-[60vh] relative overflow-hidden"
+    >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-gray-100" />
       {/* Subtle background shape */}
@@ -63,7 +68,9 @@ function Services() {
               whileHover={{ shadow: "xl" }}
               viewport={{ once: true }}
             >
-              <h3 className="text-base font-semibold text-teal-500 mb-2">{service.title}</h3>
+              <h3 className="text-base font-semibold text-teal-500 mb-2">
+                {service.title}
+              </h3>
               <p className="text-sm text-gray-900">{service.description}</p>
             </motion.div>
           ))}

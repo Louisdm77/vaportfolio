@@ -31,7 +31,7 @@ function About() {
         </div>
 
         {/* Cards in Horizontal Row */}
-        <div className="flex flex-row gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
+        <div className="grid grid-cols-2 gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
           {[
             { title: "Certified Expertise", desc: "Trusted VA certification" },
             { title: "Technical Proficiency", desc: "Google Workspace & Web Dev" },

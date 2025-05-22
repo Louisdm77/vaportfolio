@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import calendar from "../assets/images/calendar.png";
 import data from "../assets/images/data.png";
 import email from "../assets/images/email.png";
 import slide from "../assets/images/slide.png";
 import web from "../assets/images/web.png";
-import { FaSearchPlus } from "react-icons/fa"; // Import magnifying glass icon
+import { FaSearchPlus } from "react-icons/fa";
 
 function Portfolio() {
   const projects = [
@@ -35,20 +35,30 @@ function Portfolio() {
     },
     {
       title: "Web Development",
-      description:
-        "Developed and maintained websites with modern technologies.",
+      description: "Developed and maintained websites with modern technologies.",
       image: web,
       link: "#web-development",
     },
     {
       title: "Research & Documentation",
       description: "Conducted thorough research and documented findings.",
-      image: "research-documentation.png",
+      image: web,
       link: "#research-documentation",
     },
   ];
 
   const [selectedImage, setSelectedImage] = useState(null);
+
+  // Debug click handler
+  const handleImageClick = (image) => {
+    console.log("Image clicked:", image);
+    setSelectedImage(image || placeholder); // Fallback to placeholder
+  };
+
+  // Log modal state and errors
+  useEffect(() => {
+    console.log("Selected image state:", selectedImage);
+  }, [selectedImage]);
 
   return (
     <section
@@ -74,12 +84,12 @@ function Portfolio() {
         </h2>
         <div className="w-20 h-0.5 bg-teal-500 mb-4 mx-auto shadow-lg shadow-teal-500/50" />
 
-        {/* Cards in Two Rows */}
-        <div className="flex flex-wrap justify-center gap-6">
+        {/* Cards in Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="bg-white/80 backdrop-blur-sm p-5 rounded-3xl shadow-md border border-teal-300/50 hover:bg-teal-50/90 w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] max-w-[380px]"
+              className="bg-white/80 backdrop-blur-sm p-5 rounded-3xl shadow-md border border-teal-300/50 hover:bg-teal-50/90 w-full lg:w-full"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -89,36 +99,30 @@ function Portfolio() {
               }}
               viewport={{ once: true }}
             >
-              <div className="relative group">
+              <div className="relative group" onClick={() => handleImageClick(project.image)}>
                 <motion.img
-                  src={project.image}
+                  src={project.image || placeholder}
                   alt={project.title}
                   className="w-full h-64 object-cover rounded-xl mb-4 cursor-pointer"
-                  onClick={() => setSelectedImage(project.image)}
-                  whileHover={{ scale: 1.05 }} // Desktop hover
-                  whileTap={{ scale: 0.95 }} // Mobile tap feedback
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.3 }}
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${project.image}`);
+                    e.target.src = placeholder; // Fallback to placeholder
+                  }}
                 />
                 {/* Hover overlay for desktop */}
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex">
-                  <span className="text-white font-medium text-lg">
-                    Click to View
-                  </span>
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex pointer-events-none">
+                  <span className="text-white font-medium text-lg">Click to View</span>
                 </div>
                 {/* Persistent icon for mobile */}
-                <div className="absolute bottom-2 right-2 bg-teal-500 bg-opacity-70 rounded-full p-2 md:hidden">
-                  <FaSearchPlus
-                    className="text-white text-lg"
-                    aria-label="Tap to view image"
-                  />
+                <div className="absolute bottom-2 right-2 bg-teal-500 bg-opacity-70 rounded-full p-2 md:hidden pointer-events-none">
+                  <FaSearchPlus className="text-white text-lg" aria-label="Tap to view image" />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-teal-500 mb-2 font-serif">
-                {project.title}
-              </h3>
-              <p className="text-sm text-gray-900 mb-3">
-                {project.description}
-              </p>
+              <h3 className="text-lg font-semibold text-teal-500 mb-2 font-serif">{project.title}</h3>
+              <p className="text-sm text-gray-900 mb-3">{project.description}</p>
               <motion.a
                 href={project.link}
                 className="inline-block bg-teal-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:bg-teal-600 transition duration-300"
@@ -138,7 +142,7 @@ function Portfolio() {
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-[100]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -152,11 +156,20 @@ function Portfolio() {
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <motion.img
-                src={selectedImage}
-                alt="Selected Work"
-                className="w-full max-w-[800px] max-h-[80vh] object-contain rounded-lg"
-              />
+              {selectedImage ? (
+                <motion.img
+                  src={selectedImage}
+                  alt="Selected Work"
+                  className="w-full max-w-[800px] max-h-[80vh] object-contain rounded-lg"
+                  onError={(e) => {
+                    console.error("Modal image failed to load:", selectedImage);
+                    e.target.src = placeholder; // Fallback to placeholder
+                    setSelectedImage(null); // Close modal
+                  }}
+                />
+              ) : (
+                <div className="text-red-500 text-center">Image failed to load</div>
+              )}
               <button
                 className="absolute top-2 right-2 bg-teal-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl shadow-lg hover:bg-teal-600 transition duration-300"
                 onClick={() => setSelectedImage(null)}
