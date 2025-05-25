@@ -5,17 +5,17 @@ import { useMediaQuery } from 'react-responsive';
 function Testimonials() {
   const testimonials = [
     {
-      name: 'Jane Doe',
+      name: 'Tope Ishola',
       quote:
         'Akwaji’s transcription services were exceptionally accurate and delivered ahead of schedule, making my workflow seamless.',
     },
     {
-      name: 'John Smith',
+      name: 'Francis  Fidelis',
       quote:
         'Professional email management transformed my inbox, saving me hours each week with clear, concise responses.',
     },
     {
-      name: 'Sarah Lee',
+      name: 'Sarah Aban',
       quote:
         'The formatted reports provided were polished and professional, significantly enhancing our brand’s presentation.',
     },
